@@ -1,0 +1,13 @@
+main {
+  min-width: 1000px;
+  min-height: 1000px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  height: 50px;
+  width: 200px;
+}
