@@ -16,8 +16,8 @@ var events = {
   },
   emit: function (eventName, data) {
     if (this.events[eventName]) {
-      this.events[eventName].forEach(function(fn) {
-        fn(data);
+      this.events[eventName].forEach(fn => {
+        fn(data);      
       });
     }
   }

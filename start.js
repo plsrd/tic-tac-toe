@@ -1,7 +1,7 @@
 (function() {
   
   const start = {
-    //grab button
+
     init: function() {
       this.cacheDom();
       this.bindEvent();
@@ -18,6 +18,7 @@
 
     startGame: function() {
       this.main.removeChild(this.startButton);
+      events.emit('startGame');
     },
   };
 

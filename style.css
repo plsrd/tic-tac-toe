@@ -5,9 +5,16 @@ main {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
+  display: grid
+
 }
 
 button {
   height: 50px;
   width: 200px;
+}
+
+main div {
+  border: 1px solid black;
+  margin: .5em
 }
