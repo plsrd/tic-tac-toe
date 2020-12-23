@@ -1,36 +1,43 @@
 (function() {
 
-    function init() {
-      console.log('init');
-      this.drawBoard();
-    }
+  init = () => {
+    this.drawBoard();
+  }
 
-    cacheDom =  () => {
-      this.main = document.getElementById('main');
-    }
+  cacheDom = () => {
+    this.gameDisplay = document.getElementById('gameDisplay');
+    this.infoDisplay = document.getElementById('infoDisplay');
+    this.gameGrid = document.getElementById('gameGrid');
+  }
 
-    bindEvents = () => {
-      events.on('startGame', init);
-    }
+  bindEvents = () => {
+    events.on('startGame', init);
+  }
+  createDiv = (id, target) => {
+    const div = document.createElement('div');
+    div.setAttribute('id', id);
+    target.appendChild(div);
+  }
 
-    createDiv = (id) => {
-      console.log('creating div');
-      const div = document.createElement('div');
-      div.setAttribute('id', id);
-      this.main.appendChild(div);
-    }
-
-    drawBoard = () => {
-      for (let i = 1; i <= 9; i++) {
-        if (i <= 3){
-          createDiv(`A${i}`);
-        } else if (i > 3 && i <= 6) {
-          createDiv(`B${i - 3}`);
-        } else {
-          createDiv(`C${i - 6}`);
-        }
+  drawBoard = () => {
+  //create display
+    createDiv('gameDisplay', main);
+    cacheDom();
+    createDiv('infoDisplay', gameDisplay);
+    createDiv('gameGrid', gameDisplay)
+    cacheDom();
+  //append 2 divs to display: info and game board
+  //Draw tic-tac-toe grid in game board
+    for (let i = 1; i <= 9; i++) {
+      if (i <= 3){
+        createDiv(`A${i}`, gameGrid);
+      } else if (i > 3 && i <= 6) {
+        createDiv(`B${i - 3}`, gameGrid);
+      } else {
+        createDiv(`C${i - 6}`, gameGrid);
       }
     }
+  }
 
   bindEvents();
 
