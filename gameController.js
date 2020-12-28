@@ -29,9 +29,9 @@
     grid.forEach(square => {
       const div = document.getElementById(square);
       if (action === 'add') {
-        div.addEventListener('click', (square) => {turnController(square)});
+        div.addEventListener('click', turnController);
       } else {
-        //div.removeEventListener('click');
+        div.removeEventListener('click', turnController);
       }
     });
   }
@@ -68,23 +68,28 @@
     allPlayers.forEach(player => {
 
       let letters = ['A', 'B', 'C'];
+      let winner;
     
       for (let i = 0; i < letters.length; i++) {
         if (player.moves.filter(move => move.includes(letters[i])).length === 3){
-          console.log(allPlayers.indexOf(player) + 1 + ' wins');
+          winner = player;
         } else if (player.moves.includes(`A${i}`) && player.moves.includes(`B${i}`) && player.moves.includes(`C${i}`)) {
-          console.log(allPlayers.indexOf(player) + 1 + ' wins');
+          winner = player;
         } 
       }
 
       if (player.moves.includes(`A1`) && player.moves.includes(`B2`) && player.moves.includes(`C3`)) {
-        console.log(allPlayers.indexOf(player) + 1 + ' wins');
+        winner = player;
       } else if (player.moves.includes(`A3`) && player.moves.includes(`B2`) && player.moves.includes(`C1`)) {
-        console.log(allPlayers.indexOf(player) + 1 + ' wins');
+        winner = player;
       }
 
+      if (winner !== undefined) {
+        events.emit('playerWins', winner.marker);
+        controlMoveListeners('remove');
+        moveCount = 0;
+      }
     });
-
   }
 
 })()
