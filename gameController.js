@@ -74,8 +74,15 @@
           console.log(allPlayers.indexOf(player) + 1 + ' wins');
         } else if (player.moves.includes(`A${i}`) && player.moves.includes(`B${i}`) && player.moves.includes(`C${i}`)) {
           console.log(allPlayers.indexOf(player) + 1 + ' wins');
-        }
+        } 
       }
+
+      if (player.moves.includes(`A1`) && player.moves.includes(`B2`) && player.moves.includes(`C3`)) {
+        console.log(allPlayers.indexOf(player) + 1 + ' wins');
+      } else if (player.moves.includes(`A3`) && player.moves.includes(`B2`) && player.moves.includes(`C1`)) {
+        console.log(allPlayers.indexOf(player) + 1 + ' wins');
+      }
+
     });
 
   }
