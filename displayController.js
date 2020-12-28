@@ -8,6 +8,7 @@
 
     bindEvents: () => {
       events.on('startGame', display.init);
+      events.on('playerMove', display.drawMove);
     },
 
     createElement: (id, target, type) => {
@@ -37,10 +38,10 @@
       humanButton.textContent = 'human v human';
       display.createElement('computerButton', gameDisplay, 'button');
       computerButton.textContent = 'human v computer';
-      display.playerSelectorEvents();
+      display.playerSelectEvents();
     },
 
-    playerSelectorEvents: () => {
+    playerSelectEvents: () => {
       computerButton.addEventListener('click', () => {
         events.emit('computerOpponent');
         display.clearDisplay(gameDisplay);
@@ -48,9 +49,9 @@
       });
 
       humanButton.addEventListener('click', () => {
-        events.emit('humanOpponent');
         display.clearDisplay(gameDisplay);
         display.drawBoard();
+        events.emit('humanOpponent');
       });
       
     },
@@ -59,6 +60,13 @@
       while (el.firstChild) {
         el.removeChild(el.firstChild);
       }
+    },
+
+    drawMove: (info) => {
+      let marker = info[0];
+      let location = info.slice(1);
+      const div = document.getElementById(location);
+      div.textContent = `${marker}`;
     },
   }
 
