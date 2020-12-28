@@ -9,6 +9,7 @@
     bindEvents: () => {
       events.on('startGame', display.init);
       events.on('playerMove', display.drawMove);
+      events.on('playerWins', display.drawWinner);
     },
 
     createElement: (id, target, type) => {
@@ -67,6 +68,20 @@
       let location = info.slice(1);
       const div = document.getElementById(location);
       div.textContent = `${marker}`;
+    },
+
+    drawWinner: (marker) => {
+      const h2 = document.createElement('h2');
+      gameDisplay.prepend(h2);
+      h2.textContent = `${marker} wins!`;
+      display.createElement('reset', gameDisplay, 'button');
+      reset.textContent = 'reset';
+      reset.addEventListener('click', display.resetDisplay);
+    },
+
+    resetDisplay: () => {
+      display.clearDisplay(main);
+      display.drawPlayerSelector();
     },
   }
 

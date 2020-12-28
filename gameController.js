@@ -21,8 +21,6 @@
   }
   players.bindEvents();
 
-  let moveCount = 0;
-
   const controlMoveListeners = (action) => {
     const grid = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
 
@@ -41,12 +39,14 @@
     return square.textContent === ''
   }
 
+  let moveCount = 1;
+
   const turnController = (e) => {
 
     let move = e.target.id;
 
     if(checkLegalMove(move)) {
-      if (moveCount === 0 || moveCount % 2 === 0){
+      if (moveCount === 1 || moveCount % 2 === 1){
         players.playerOne.moves.push(move);
         events.emit('playerMove', players.playerOne.marker+move);
       } else {
@@ -57,7 +57,7 @@
       if (moveCount >= 4) {
         checkWinner();
       }
-
+      console.log(players.playerOne.moves + ':' + players.playerTwo.moves + ':' + moveCount);
       moveCount++;
     }
   }
