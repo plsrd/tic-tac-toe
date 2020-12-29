@@ -28,7 +28,6 @@
 
     initHumanOpponent: () => {
       players.playerTwo = players.createPlayer(2, 'O');
-      console.log('creating humans:' + players.playerOne.marker + players.playerTwo.marker);
     },
 
     addMove: (info) => {
