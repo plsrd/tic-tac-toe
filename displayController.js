@@ -18,6 +18,8 @@
       target.appendChild(el);
     },
 
+    board: ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'],
+
     drawBoard: () => {
       display.createElement('gameGrid', gameDisplay, 'div')
       for (let i = 1; i <= 9; i++) {
@@ -67,6 +69,8 @@
     drawMove: (info) => {
       let marker = info[0];
       let location = info.slice(1);
+      display.board.splice(display.board.indexOf(location), 1);
+      events.emit('moveComplete', display.board);
       const div = document.getElementById(location);
       div.textContent = `${marker}`;
     },
@@ -84,8 +88,10 @@
     resetDisplay: () => {
       display.clearDisplay(main);
       display.drawPlayerSelector();
+      display.board = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
       events.emit('reset');
     },
+
   }
 
   display.bindEvents();
