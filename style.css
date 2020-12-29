@@ -1,12 +1,5 @@
-body {
-  /*background-image: url('images/background.jpg');
-  max-height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;*/
-}
-
 main {
+  box-sizing: content-box;
   max-width: 100vw;
   height: 100vh;
   display: flex;
@@ -18,25 +11,18 @@ main {
 button {
   height: 50px;
   width: 200px;
-  /*background-color: rgba(140, 147, 163, 0.45);
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(140, 147, 163, 0.85), inset 0px 0px 20px 0px rgba(140, 147, 163, 0.85);
-  -moz-box-shadow:    0px 0px 20px 0px rgba(140, 147, 163, 0.85), inset 0px 0px 20px 0px rgba(140, 147, 163, 0.85);
-  box-shadow:         0px 0px 20px 0px rgba(140, 147, 163, 0.85), inset 0px 0px 20px 0px rgba(140, 147, 163, 0.85);*/
-}
+ }
 
 #gameDisplay {
   box-sizing: border-box;
   min-width: 80%;
   min-height: 70%;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
+  flex-flow: column nowrap;
+  justify-content: center;
   align-items: center;
   border: 1px solid black;
-  /*background-color: rgba(103, 115, 141, .35);
-  -webkit-box-shadow: inset 0px 0px 15px 0px rgba(165, 172, 185, 0.75);
-  -moz-box-shadow:    inset 0px 0px 15px 0px rgba(165, 172, 185, 0.75);
-  box-shadow:         inset 0px 0px 15px 0px rgba(165, 172, 185, 0.75);*/
+
 }
 
 #infoDisplay {
@@ -51,10 +37,13 @@ button {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
+  margin: 3em;
 }
 
 #gameGrid div {
   height: 100%;
   width: 100%;
   border: 1px solid grey;
+  font-size: 7em;
+  text-align: center;
 }

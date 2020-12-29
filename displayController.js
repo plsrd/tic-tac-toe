@@ -9,7 +9,7 @@
     bindEvents: () => {
       events.on('startGame', display.init);
       events.on('playerMove', display.drawMove);
-      events.on('playerWins', display.drawWinner);
+      events.on('drawWinner', display.drawWinner);
     },
 
     createElement: (id, target, type) => {
@@ -44,17 +44,18 @@
 
     playerSelectEvents: () => {
       computerButton.addEventListener('click', () => {
-        events.emit('computerOpponent');
         display.clearDisplay(gameDisplay);
         display.drawBoard();
+        events.emit('computerOpponent');
+        events.emit('playerChosen', 'add');
       });
 
       humanButton.addEventListener('click', () => {
         display.clearDisplay(gameDisplay);
         display.drawBoard();
         events.emit('humanOpponent');
+        events.emit('playerChosen', 'add');
       });
-      
     },
 
     clearDisplay: (el) => {
@@ -70,11 +71,12 @@
       div.textContent = `${marker}`;
     },
 
-    drawWinner: (marker) => {
+    drawWinner: (id) => {
       const h2 = document.createElement('h2');
       gameDisplay.prepend(h2);
-      h2.textContent = `${marker} wins!`;
+      h2.textContent = `player ${id} wins!`;
       display.createElement('reset', gameDisplay, 'button');
+      const reset = document.getElementById('reset');
       reset.textContent = 'reset';
       reset.addEventListener('click', display.resetDisplay);
     },
@@ -82,6 +84,7 @@
     resetDisplay: () => {
       display.clearDisplay(main);
       display.drawPlayerSelector();
+      events.emit('reset');
     },
   }
 
