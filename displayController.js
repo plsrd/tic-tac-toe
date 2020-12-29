@@ -74,7 +74,11 @@
     drawWinner: (id) => {
       const h2 = document.createElement('h2');
       gameDisplay.prepend(h2);
-      h2.textContent = `player ${id} wins!`;
+      if (id !== 'tie') {
+        h2.textContent = `player ${id} wins!`;
+      } else {
+        h2.textContent = 'TIE!'
+      }
       display.createElement('reset', gameDisplay, 'button');
       const reset = document.getElementById('reset');
       reset.textContent = 'reset';

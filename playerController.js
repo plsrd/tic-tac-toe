@@ -4,7 +4,6 @@
     bindEvents: () => {
       players.init();
       events.on('humanOpponent', players.initHumanOpponent);
-      events.on('playerMove', players.addMove);
       events.on('possibleWinner', players.sendMoves);
       events.on('reset', players.reset);
     },

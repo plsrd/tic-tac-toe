@@ -1,47 +1,52 @@
 (function () {
   const bindEvents = () => {
+    events.on('moveComplete', updateCurrentBoard);
   }
 
-  const winCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [6, 4, 2]
-  ];
+  let currentBoard;
 
   const human = 'X';
   const ai = 'O';
-  
-  const checkWin = (board, player) => {
-    let plays = board.reduce((a, e, i) =>
-		  (e === player) ? a.concat(i) : a, []);
-	  let gameWon = null;
-	  for (let [index, win] of winCombos.entries()) {
-	  	if (win.every(elem => plays.indexOf(elem) > -1)) {
-			  gameWon = {index, player};
-			  break;
-		  }
-	  }
-	  return gameWon;
+
+  const updateCurrentBoard = (data) => {
+    currentBoard = data;
+    aiMove();
   }
 
-  const getMoves = () => {
-    return currentBoard.filter(spot => typeof spot == 'number');
+  const checkWin = (board, player) => {
+    if (
+      (board[0] == player && board[1] == player && board[2] == player) ||
+      (board[3] == player && board[4] == player && board[5] == player) ||
+      (board[6] == player && board[7] == player && board[8] == player) ||
+      (board[0] == player && board[3] == player && board[6] == player) ||
+      (board[1] == player && board[4] == player && board[7] == player) ||
+      (board[2] == player && board[5] == player && board[8] == player) ||
+      (board[0] == player && board[4] == player && board[8] == player) ||
+      (board[2] == player && board[4] == player && board[6] == player)
+      ) {
+      return true;
+      } else {
+      return false;
+      }
+     }
+
+  const getMoves = (board) => {
+    return board.filter(spot => typeof spot == 'number');
+  }
+
+  const aiMove = () => {
+    events.emit('computerMove', minimax(currentBoard, ai).index);
   }
 
   const minimax = (newBoard, player) => {
-    let spots = getMoves();
+    let spots = getMoves(newBoard);
 
     if (checkWin(newBoard, human)) {
-      return { score: -10 }
+      return {score: -10};
     } else if (checkWin(newBoard, ai)) {
-      return { score: 10 }
+      return {score: 10};
     } else if (spots.length === 0) {
-      return { score: 0 }
+      return {score: 0};
     }
 
     let moves = [];
@@ -50,7 +55,7 @@
       move.index = newBoard[spots[i]];
       newBoard[spots[i]] = player;
 
-      if (player === ai) {
+      if (player == ai) {
         let result = minimax(newBoard, human);
         move.score = result.score;
       } else {
@@ -62,10 +67,11 @@
 
       moves.push(move);
     }
+
     let bestMove;
-    if (player === ai) {
+    if(player === ai) {
       let bestScore = -10000;
-      for (let i = 0; i < moves.length; i++) {
+      for(let i = 0; i < moves.length; i++) {
         if (moves[i].score > bestScore) {
           bestScore = moves[i].score;
           bestMove = i;
@@ -73,15 +79,15 @@
       }
     } else {
       let bestScore = 10000;
-      for (let i = 0; i < moves.length; i++) {
+      for(let i = 0; i < moves.length; i++) {
         if (moves[i].score < bestScore) {
           bestScore = moves[i].score;
           bestMove = i;
         }
       }
     }
-    events.emit('playerMove', O+moves[bestMove]);
-  }
+  return moves[bestMove];
+}
 
   bindEvents();
 })()
