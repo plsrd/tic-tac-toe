@@ -4,7 +4,7 @@ This game was created for The Odin Project's Javascript course. The main focus o
 
 The computer player was created using the minimax algorithm, which I was able to recreate using this [youtube video](https://www.youtube.com/watch?v=P2TcQ3h0ipQ) and this [article](https://www.freecodecamp.org/news/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37/). Because of this, the best you can hope for against the ai is a draw. As in Wargames, the only winning move is not to play.
 
-Also, thank you to [Animista](https://animista.net/play/text/tracking-in) for generating the CSS that I used as the basis for the `'O'` animations.
+Also, thank you to [Animista](https://animista.net/play/text/tracking-in) for generating the CSS that I used for the `'O'` animations and element vibrations.
 
 ---
 ## Assignment
