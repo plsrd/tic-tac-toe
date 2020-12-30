@@ -1,9 +1,4 @@
 (function () {
-
-  const players = () => {
-
-  }
-
   const bindEvents =  () => {
       events.on('playerChosen', controlMoveListeners);
       events.on('computerOpponent', toggleAI)
