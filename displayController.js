@@ -130,6 +130,7 @@
 
     drawWinner: (name) => {
       const h2 = document.createElement('h2');
+      gameDisplay.classList.add('shake');
       gameDisplay.prepend(h2);
       if (name !== 'tie') {
         h2.textContent = `${name} wins`;
