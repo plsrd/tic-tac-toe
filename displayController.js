@@ -10,7 +10,8 @@
       events.on('startGame', display.init);
       events.on('playerMove', display.drawMove);
       events.on('drawWinner', display.drawWinner);
-      events.on('removeOpen', display.removeOpen)
+      events.on('addFade', display.addFade);
+      events.on('removeOpen', display.removeOpen);
     },
 
     createElement: (id, target, type) => {
@@ -81,8 +82,16 @@
       let marker = info[0];
       let location = info.slice(1);
       const div = document.getElementById(location);
-      div.textContent = `${marker}`;
+      display.createElement(`${location}p`, div, 'p'); 
+      const p = document.getElementById(`${location}p`);
+      p.textContent = `${marker}`;
       div.classList.remove('open');
+    },
+
+    addFade: (location) => {
+      console.log(location+'p');
+      const div = document.getElementById(location+'p');
+      div.classList.add('text-focus-in');
     },
 
     drawWinner: (id) => {
@@ -90,7 +99,11 @@
       gameDisplay.prepend(h2);
       if (id !== 'tie') {
         if(id !== 'computer') {
-          h2.textContent = `player ${id} wins!`;
+          if (id === 'X'){
+            h2.textContent = 'player one wins';
+          } else {
+            h2.textContent = 'player two wins';
+          }
         } else {
           h2.textContent = `${id} wins`;
         }

@@ -68,8 +68,9 @@
 
   const parseAiMove = (index) => {
     currentBoard.splice(index, 1, 'O');
-    console.log(currentBoard)
-    events.emit('playerMove', 'O'+Object.keys(conversionTable)[index]);
+    let location = Object.keys(conversionTable)[index];
+    events.emit('playerMove', 'O'+ location);
+    events.emit('addFade', location);
     checkWin(currentBoard, 'O');
     moveCount++;
   }
