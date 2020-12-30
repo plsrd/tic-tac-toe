@@ -35,7 +35,7 @@ button, #reset {
   border-radius: 5px;
 }
 
-#playerSelect {
+#playerSelect, #namePrompt {
   color: #303f91;
   font-size: 2em;
   margin: .8em;
@@ -114,4 +114,15 @@ h2 {
 }
 
 
-  
+#nameInput {
+  margin: .5em;
+  outline: none;
+  border: 2px solid #303f91;
+  border-radius: 5px;
+  height: 35px;
+  width: 200px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.5em;
+  color: #303f91;
+  padding-left: .5em;
+}

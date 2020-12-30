@@ -1,5 +1,9 @@
 (function () {
 
+  const players = () => {
+
+  }
+
   const bindEvents =  () => {
       events.on('playerChosen', controlMoveListeners);
       events.on('computerOpponent', toggleAI)
@@ -89,8 +93,10 @@
         if(aiOpponent === true && player === 'O') {
         events.emit('drawWinner', 'computer');
         events.emit('removeOpen', getBlanks(currentBoard));
-        } else { 
-        events.emit('drawWinner', player);
+        } else if (aiOpponent === false && player === 'O') { 
+          events.emit('sendWinner', 2);
+        } else if (aiOpponent === false && player === 'X') {
+          events.emit('sendWinner', 1);
         }
         controlMoveListeners('remove');
       } else {
