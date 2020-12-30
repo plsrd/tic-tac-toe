@@ -222,4 +222,8 @@ h2 {
     font-size: 2em;
     height: 30px;
   }
+
+  #button {
+    height: 50px;
+  }
 }
