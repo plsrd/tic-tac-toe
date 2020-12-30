@@ -184,3 +184,42 @@ h2 {
             transform: translate(0);
   }
 }
+/*add mediaquery 500x540*/
+
+@media screen and (max-width: 500px) {
+  button, #reset {
+    margin: .5em;
+    height: 30px;
+    width: 125px;
+    font-size: 1em;
+    letter-spacing: 3px;
+   }
+
+  #playerSelect, #namePrompt {
+    text-align: center;
+    font-size: 1.5em;
+    margin: .6em;
+  }
+
+  #nameInput {
+    margin: .5em;
+    height: 30px;
+    width: 125px;
+    font-size: 1.1em;
+  }
+
+  #gameGrid {
+    width: 200px;
+    height: 200px;
+    margin: 1em;
+  }
+
+  .gridSquare {
+    font-size: 2.8em;
+  }
+
+  h2 {
+    font-size: 2em;
+    height: 30px;
+  }
+}
