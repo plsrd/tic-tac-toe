@@ -2,7 +2,6 @@
 
   const bindEvents =  () => {
       events.on('playerChosen', controlMoveListeners);
-      events.on('winnerChosen', controlMoveListeners);
       events.on('computerOpponent', toggleAI)
       events.on('computerMove', parseAiMove);
       events.on('reset', resetController);
@@ -86,12 +85,27 @@
       (board[0] == player && board[4] == player && board[8] == player) ||
       (board[2] == player && board[4] == player && board[6] == player)
       ) {
+        if(aiOpponent === true && player === 'O') {
+        events.emit('drawWinner', 'computer');
+        events.emit('removeOpen', getBlanks(currentBoard));
+        } else { 
         events.emit('drawWinner', player);
+        }
+        controlMoveListeners('remove');
       } else {
         if (moveCount === 9) {
           events.emit('drawWinner', 'tie');
+          controlMoveListeners('remove');
         }
       }
+  }
+
+  const getBlanks = (board) => {
+    let emptyIndexes = board.filter(spot => typeof spot == 'number');
+    for (let i = 0; i < emptyIndexes.length; i++){
+      emptyIndexes.splice(i, 1, Object.keys(conversionTable)[emptyIndexes[i]]);
+    }
+    return emptyIndexes;
   }
 
   const resetController = () => {

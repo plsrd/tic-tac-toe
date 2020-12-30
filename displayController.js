@@ -10,6 +10,7 @@
       events.on('startGame', display.init);
       events.on('playerMove', display.drawMove);
       events.on('drawWinner', display.drawWinner);
+      events.on('removeOpen', display.removeOpen)
     },
 
     createElement: (id, target, type) => {
@@ -23,10 +24,19 @@
       for (let i = 1; i <= 9; i++) {
         if (i <= 3){
           display.createElement(`A${i}`, gameGrid, 'div');
+          const div = document.getElementById(`A${i}`);
+          div.classList.add('gridSquare');
+          div.classList.add('open');
         } else if (i > 3 && i <= 6) {
           display.createElement(`B${i - 3}`, gameGrid, 'div');
+          const div = document.getElementById(`B${i - 3}`);
+          div.classList.add('gridSquare');
+          div.classList.add('open');
         } else {
           display.createElement(`C${i - 6}`, gameGrid, 'div');
+          const div = document.getElementById(`C${i - 6}`);
+          div.classList.add('gridSquare');
+          div.classList.add('open');
         }
       }
     },
@@ -34,11 +44,14 @@
     drawPlayerSelector: () => {
       display.createElement('gameDisplay', main, 'div');
       display.createElement('playerSelect', gameDisplay, 'p');
-      playerSelect.textContent = 'select game';
-      display.createElement('humanButton', gameDisplay, 'button');
-      humanButton.textContent = 'human v human';
-      display.createElement('computerButton', gameDisplay, 'button');
-      computerButton.textContent = 'human v computer';
+      display.createElement('buttonContainer', gameDisplay, 'div');
+      playerSelect.textContent = 'select opponent';
+      display.createElement('humanButton', buttonContainer, 'button');
+      humanButton.textContent = 'human';
+      humanButton.classList.add('fill');
+      display.createElement('computerButton', buttonContainer, 'button');
+      computerButton.textContent = 'computer';
+      computerButton.classList.add('fill');
       display.playerSelectEvents();
     },
 
@@ -69,19 +82,25 @@
       let location = info.slice(1);
       const div = document.getElementById(location);
       div.textContent = `${marker}`;
+      div.classList.remove('open');
     },
 
     drawWinner: (id) => {
       const h2 = document.createElement('h2');
       gameDisplay.prepend(h2);
       if (id !== 'tie') {
-        h2.textContent = `player ${id} wins!`;
+        if(id !== 'computer') {
+          h2.textContent = `player ${id} wins!`;
+        } else {
+          h2.textContent = `${id} wins`;
+        }
       } else {
-        h2.textContent = 'TIE!'
+        h2.textContent = 'draw'
       }
       display.createElement('reset', gameDisplay, 'button');
       const reset = document.getElementById('reset');
       reset.textContent = 'reset';
+      reset.classList.add('fill');
       reset.addEventListener('click', display.resetDisplay);
     },
 
@@ -89,6 +108,15 @@
       display.clearDisplay(main);
       display.drawPlayerSelector();
       events.emit('reset');
+    },
+
+    removeOpen: (arr) => {
+      console.log(arr)
+      arr.forEach(blank => {
+        console.log(blank)
+        const div = document.getElementById(blank);
+        div.classList.remove('open');
+      })
     },
 
   }
