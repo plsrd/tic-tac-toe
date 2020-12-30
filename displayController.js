@@ -85,6 +85,13 @@
 
     playerInputEvents: () => {
       nameSubmit.addEventListener('click', () => {
+        if(nameInput.value === '') { 
+          nameInput.classList.add('shake');
+          setTimeout(function(){
+            nameInput.classList.remove('shake');
+          }, 400);
+          return 
+        }
         events.emit('playerCreated', nameInput.value);
         if (document.getElementById('nameInput')) { 
           nameInput.value = ''; 
