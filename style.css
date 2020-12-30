@@ -226,4 +226,9 @@ h2 {
   #button {
     height: 50px;
   }
+
+  .open:hover {
+    background-color: #68e8ec;
+    color: #303f91;
+  }
 }
